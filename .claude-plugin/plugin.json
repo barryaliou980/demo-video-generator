@@ -1,0 +1,13 @@
+{
+  "name": "demo-video-generator",
+  "displayName": "SaaS Demo Video Generator",
+  "description": "Generates a professional demo video (.mp4) of your SaaS app from a user journey: Playwright captures your screens, Remotion animates them (Ken Burns, highlights, text overlays) — Stripe/Linear product-tour style, no video editor needed.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Aliou Barry"
+  },
+  "homepage": "https://github.com/barryaliou980/demo-video-generator",
+  "repository": "https://github.com/barryaliou980/demo-video-generator",
+  "license": "MIT",
+  "keywords": ["demo-video", "product-tour", "playwright", "remotion", "screenshots", "marketing", "landing-page", "saas", "video", "motion-design"]
+}

@@ -15,12 +15,12 @@ Generates a professional presentation video (.mp4) of a SaaS app from a user jou
 
 ## Pipeline
 
-All artifacts live in `demo-video/` at the target project root.
+All artifacts live in `demo-video/` at the target project root. `SKILL_DIR` below refers to this skill's own directory (`${CLAUDE_PLUGIN_ROOT}/skills/demo-video-generator` when installed as a plugin).
 
 ### Step 0 — Project detection
 
 ```bash
-node <skill-dir>/scripts/detect-app.js
+node "$SKILL_DIR/scripts/detect-app.js"
 ```
 
 Returns `{ framework, devCommand, port, url }` as JSON. Then launch the app in the background with the detected command and poll the URL until it responds (max ~60s):
@@ -41,7 +41,7 @@ Save the answers to `demo-video/questionnaire.json` (format documented in `quest
 
 ```bash
 cd demo-video && npm install playwright && npx playwright install chromium
-node <skill-dir>/scripts/playwright-runner.js demo-video/questionnaire.json
+node "$SKILL_DIR/scripts/playwright-runner.js" demo-video/questionnaire.json
 ```
 
 The runner executes each step (navigation, clicks, form fills), waits for the target selector before each capture, screenshots at high resolution, and records the `boundingBox()` of the element to highlight.
@@ -54,8 +54,8 @@ The runner executes each step (navigation, clicks, form fills), waits for the ta
 
 Scaffold the Remotion project in `demo-video/`:
 
-1. Copy `templates/remotion/src/` (Root.tsx, Intro.tsx, ScreenHighlight.tsx, Outro.tsx, index.ts) into `demo-video/src/`
-2. Copy `templates/remotion/package.json` and `tsconfig.json` into `demo-video/`, then `npm install`
+1. Copy `$SKILL_DIR/templates/remotion/src/` (Root.tsx, Intro.tsx, ScreenHighlight.tsx, Outro.tsx, index.ts) into `demo-video/src/`
+2. Copy `$SKILL_DIR/templates/remotion/package.json` and `tsconfig.json` into `demo-video/`, then `npm install`
 3. Expose the captures to Remotion (`staticFile()` serves from `public/`): `mkdir -p demo-video/public && cp -r demo-video/screenshots demo-video/public/`
 4. Customize Intro/Outro: product name, tagline, CTA, and brand colors (read the questionnaire answers; draw from the project's CSS theme if available)
 5. Adjust pacing to the requested visual tone (fast/dynamic → short durations, snappy transitions; calm/premium → slower, crossfades)
