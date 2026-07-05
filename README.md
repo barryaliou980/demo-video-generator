@@ -27,7 +27,7 @@ output/demo-video.mp4 delivered in your project
 ## Installation
 
 ```
-/plugin marketplace add barryaliou980/feature-status-tracker
+/plugin marketplace add barryaliou980/aliou-skills
 /plugin install demo-video-generator@aliou-skills
 ```
 
