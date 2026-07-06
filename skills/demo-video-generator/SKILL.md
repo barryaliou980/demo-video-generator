@@ -35,7 +35,7 @@ If the app is already running on the port, do not relaunch it.
 
 Ask the user the questions from `questionnaire.md` (via AskUserQuestion or in conversation). Do NOT invent the journey: steps, key messages, and credentials come from the user.
 
-Save the answers to `demo-video/questionnaire.json` (format documented in `questionnaire.md`). This file is reusable to regenerate the video later.
+Save the answers to `demo-video/questionnaire.json` (format documented in `questionnaire.md`). It drives the whole pipeline; the cleanup step (Step 5) removes it along with the rest of the working directory. To let the user regenerate later, offer to save a copy outside `demo-video/` (e.g. `output/brief.json`) before cleanup.
 
 ### Step 2 — Playwright captures
 
@@ -67,6 +67,17 @@ cd demo-video && npx remotion render DemoVideo ../output/demo-video.mp4
 ```
 
 Verify the file exists and report its size/duration to the user.
+
+### Step 5 — Cleanup
+
+The video lives in `output/demo-video.mp4`, outside the working directory. Everything else (`node_modules/` with Chromium, screenshots, the Remotion scaffold, `questionnaire.json`) is disposable and can weigh hundreds of MB. Delete the whole working directory once the video is confirmed:
+
+```bash
+# Guard: only remove the scaffold if the video actually rendered.
+test -f output/demo-video.mp4 && rm -rf demo-video
+```
+
+**Never** `rm -rf demo-video` from inside `demo-video/` (run it from the project root), and never delete before the `test -f` guard passes — if the render failed, keep the directory so the failure can be diagnosed.
 
 ## Quick reference
 

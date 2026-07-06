@@ -1,6 +1,6 @@
 # Demo Video Brief — Questionnaire
 
-Ask the user these questions before generating anything. Save the answers as `demo-video/questionnaire.json` (format below). The brief is reusable: rerun the pipeline with the same file if the app's design changes.
+Ask the user these questions before generating anything. Save the answers as `demo-video/questionnaire.json` (format below). This file drives the pipeline and is deleted with the working directory at cleanup; to reuse the brief across sessions, save a copy outside `demo-video/` first.
 
 ## Questions
 

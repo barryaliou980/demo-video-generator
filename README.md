@@ -20,6 +20,8 @@ Playwright captures → hi-res screenshots + highlight coordinates
 Remotion composition (Ken Burns, highlights, overlays, transitions)
         ↓
 output/demo-video.mp4 delivered in your project
+        ↓
+Working directory cleaned up (only the video is kept)
 ```
 
 **Why Claude Code and not regular chat:** the pipeline needs local network access (to run your app in dev mode), Playwright script execution, and video rendering via Remotion — all native to Claude Code's agentic environment.
@@ -44,10 +46,11 @@ or
 Claude will:
 
 1. **Detect your project** — framework (Next.js, Vite, Nuxt, CRA, SvelteKit, Astro, Angular…), dev command, and port, then launch the app and wait until it responds.
-2. **Ask you a short brief** — journey steps, action per step, element to highlight, key message per screen, test credentials, visual tone, target duration. Saved to `demo-video/questionnaire.json`, reusable to regenerate the video after a redesign.
+2. **Ask you a short brief** — journey steps, action per step, element to highlight, key message per screen, test credentials, visual tone, target duration.
 3. **Capture each screen** — waits for the right selector before every screenshot (never a blank/loading shot) and records the exact coordinates of the element to highlight. On captcha/2FA or a missing selector, it stops and asks you instead of failing silently.
 4. **Compose the video** — per-screen Ken Burns zoom centered on the highlight, pulsing ring on the target element, synced text overlays, crossfade transitions, branded intro and CTA outro (colors pulled from your brief or your app's CSS theme).
 5. **Export** — `output/demo-video.mp4`, 1920×1080 @ 30fps.
+6. **Clean up** — deletes the working directory (Chromium, screenshots, the Remotion scaffold), so only `output/demo-video.mp4` is left behind.
 
 ## Example brief
 
