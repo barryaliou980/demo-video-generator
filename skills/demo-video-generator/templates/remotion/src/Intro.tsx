@@ -5,6 +5,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
+import { fontFamily } from "./fonts";
 
 export type Branding = {
   productName: string;
@@ -32,7 +33,7 @@ export const Intro: React.FC<{ branding: Branding }> = ({ branding }) => {
         backgroundColor: branding.backgroundColor,
         justifyContent: "center",
         alignItems: "center",
-        fontFamily: "Inter, -apple-system, sans-serif",
+        fontFamily,
         opacity: exit,
       }}
     >

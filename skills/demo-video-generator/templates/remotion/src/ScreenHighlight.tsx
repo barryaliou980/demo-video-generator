@@ -6,6 +6,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
+import { fontFamily } from "./fonts";
 
 export type Step = {
   name: string;
@@ -105,7 +106,7 @@ export const ScreenHighlight: React.FC<{
               borderRadius: 16,
               fontSize: 42,
               fontWeight: 600,
-              fontFamily: "Inter, -apple-system, sans-serif",
+              fontFamily,
               maxWidth: "70%",
               textAlign: "center",
               backdropFilter: "blur(8px)",

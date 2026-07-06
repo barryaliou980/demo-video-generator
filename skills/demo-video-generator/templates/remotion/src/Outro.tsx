@@ -6,12 +6,22 @@ import {
   useVideoConfig,
 } from "remotion";
 import type { Branding } from "./Intro";
+import { fontFamily } from "./fonts";
 
-export const Outro: React.FC<{ branding: Branding }> = ({ branding }) => {
+export const Outro: React.FC<{ branding: Branding; fadeFrames: number }> = ({
+  branding,
+  fadeFrames,
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
   const enter = spring({ frame, fps, config: { damping: 200 } });
+  // Fade the whole card in so it crossfades over the last screen instead of
+  // popping in on an abrupt cut.
+  const fadeIn = interpolate(frame, [0, fadeFrames], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
@@ -19,7 +29,8 @@ export const Outro: React.FC<{ branding: Branding }> = ({ branding }) => {
         backgroundColor: branding.backgroundColor,
         justifyContent: "center",
         alignItems: "center",
-        fontFamily: "Inter, -apple-system, sans-serif",
+        fontFamily,
+        opacity: fadeIn,
       }}
     >
       <h1

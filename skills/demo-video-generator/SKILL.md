@@ -54,7 +54,7 @@ The runner executes each step (navigation, clicks, form fills), waits for the ta
 
 Scaffold the Remotion project in `demo-video/`:
 
-1. Copy `$SKILL_DIR/templates/remotion/src/` (Root.tsx, Intro.tsx, ScreenHighlight.tsx, Outro.tsx, index.ts) into `demo-video/src/`
+1. Copy `$SKILL_DIR/templates/remotion/src/` (Root.tsx, Intro.tsx, ScreenHighlight.tsx, Outro.tsx, fonts.ts, index.ts) into `demo-video/src/`
 2. Copy `$SKILL_DIR/templates/remotion/package.json` and `tsconfig.json` into `demo-video/`, then `npm install`
 3. Expose the captures to Remotion (`staticFile()` serves from `public/`): `mkdir -p demo-video/public && cp -r demo-video/screenshots demo-video/public/`
 4. Customize Intro/Outro: product name, tagline, CTA, and brand colors (read the questionnaire answers; draw from the project's CSS theme if available)
@@ -80,6 +80,6 @@ Verify the file exists and report its size/duration to the user.
 ## Common mistakes
 
 - **Capturing a loading screen** → always `waitFor` (selector or network idle) before `screenshot()`; the runner handles this when `readySelector` or `highlightSelector` is set.
-- **Misaligned highlight** → the Playwright viewport and the Remotion composition must share the same logical dimensions (1920×1080 by default; never change one without the other).
+- **Misaligned highlight** → the Remotion composition reads its dimensions from `questionnaire.json`'s `viewport` (default 1920×1080), so it stays in sync with the Playwright capture automatically. Just don't hand-edit one side to a different size.
 - **App not ready when the runner starts** → poll the port first; never rely on a fixed `sleep`.
 - **Auth required** → use the test credentials from the brief; on captcha/2FA, ask the user to log in manually, then reuse the `storageState`.
